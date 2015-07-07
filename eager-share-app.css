@@ -13,6 +13,14 @@
   box-sizing: inherit
 }
 
+.eager-share-app * {
+  text-decoration: none !important;
+  border: 0 !important;
+  outline: none !important;
+  margin: 0 !important;
+  padding: 0 !important
+}
+
 @font-face {
   font-family: "eager-share-app-icons";
   font-style: normal;
@@ -59,7 +67,7 @@
   vertical-align: middle;
   cursor: pointer;
   background: black;
-  padding-left: 64px;
+  padding-left: 64px !important;
   height: 60px;
   line-height: 60px;
   font-size: 20px;
@@ -74,8 +82,6 @@
   .eager-share-app-target:hover,
   .eager-share-app-target:focus,
   .eager-share-app-target:active {
-    border: 0;
-    outline: none;
     color: #fff
   }
 
@@ -164,7 +170,7 @@
     top: 0;
     bottom: 0;
     left: 12px;
-    margin: auto;
+    margin: auto !important;
     text-align: center
   }
 
@@ -226,7 +232,7 @@
   }
 
     .eager-share-app-element a[class^="eager-share-app-icon-"], .eager-share-app-element a[class*=" eager-share-app-icon-"] {
-      padding: 0 20px 0 64px
+      padding: 0 20px 0 64px !important
     }
 
       .eager-share-app-element a[class^="eager-share-app-icon-"]:before, .eager-share-app-element a[class*=" eager-share-app-icon-"]:before {
@@ -238,7 +244,7 @@
         top: 0;
         bottom: 0;
         left: 12px;
-        margin: auto;
+        margin: auto !important;
         text-align: center
       }
 
@@ -261,9 +267,7 @@
   .eager-share-app-element ul {
     position: relative;
     display: block;
-    list-style-type: none;
-    margin: 0;
-    padding: 0
+    list-style-type: none
   }
 
   .eager-share-app-element li {
@@ -276,7 +280,7 @@
     width: 100%;
     line-height: 60px;
     height: 60px;
-    padding: 0 30px 0 75px;
+    padding: 0 30px 0 75px !important;
     font-size: 20px;
     font-weight: normal;
     background: #efefef;
