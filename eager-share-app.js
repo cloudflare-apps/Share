@@ -3,7 +3,7 @@
     return
   }
 
-  var options, encode, getPageAttributes, page, _Drop, target, drop, dropUl, placesMap, placesOrder, i, placesCount, addPlace, setUpPlaceLink;
+  var options, encode, getPageAttributes, page, _Drop, target, drop, dropUl, locationsCSSMap, locationStyle, placesMap, placesOrder, i, placesCount, addPlace, setUpPlaceLink;
 
   options = INSTALL_OPTIONS;
   encode = encodeURIComponent;
@@ -45,12 +45,25 @@
 
   document.body.appendChild(target);
 
+  locationsCSSMap = {
+    'left-edge': 'left: 0; top: 60px',
+    'right-edge': 'right: 0; top: 60px',
+    'top-left-corner': 'top: 30px; left: 30px',
+    'top-right-corner': 'top: 30px; right: 30px',
+    'bottom-left-corner': 'bottom: 30px; left: 30px',
+    'bottom-right-corner': 'bottom: 30px; right: 30px'
+  };
+
+  locationStyle = document.createElement('style');
+  locationStyle.innerHTML = '.eager-share-app-target {' + locationsCSSMap[options.location] + '}';
+  document.body.appendChild(locationStyle);
+
   drop = new _Drop({
     target: target,
     classes: 'eager-share-app',
     openOn: 'click',
     position: 'bottom left',
-    constrainToWindow: false,
+    constrainToWindow: true,
     constrainToScrollParent: false,
     content: '<ul></ul>'
   });
