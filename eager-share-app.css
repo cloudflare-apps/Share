@@ -58,7 +58,6 @@
   vertical-align: middle;
   cursor: pointer;
   background: black;
-  color: white;
   padding-left: 64px;
   height: 60px;
   line-height: 60px;
@@ -69,6 +68,14 @@
   -webkit-transition: width 360ms;
   transition: width 360ms
 }
+
+  .eager-share-app-target,
+  .eager-share-app-target:hover,
+  .eager-share-app-target:focus,
+  .eager-share-app-target:active {
+    outline: none;
+    color: #fff
+  }
 
   .eager-share-app-target[eager-share-app-places-count="1"] {
     -webkit-transition-delay: 300ms;
