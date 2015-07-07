@@ -1,0 +1,65 @@
+{
+  "resources": {
+    "head": [
+      {
+        "type": "style",
+        "src": "eager-share-app.css"
+      }
+    ],
+    "body": [
+      {
+        "type": "script",
+        "src": "tether.js"
+      },
+      {
+        "type": "script",
+        "src": "drop.js"
+      },
+      {
+        "type": "script",
+        "src": "eager-share-app.js"
+      }
+    ]
+  },
+  "options": {
+    "properties": {
+      "places": {
+        "order": 1,
+        "title": "Places to share",
+        "type": "object",
+        "properties": {
+          "twitter": {
+            "order": 1,
+            "title": "Twitter",
+            "type": "boolean",
+            "default": true
+          },
+          "facebook": {
+            "order": 2,
+            "title": "Facebook",
+            "type": "boolean",
+            "default": true
+          },
+          "google": {
+            "order": 3,
+            "title": "Google+",
+            "type": "boolean",
+            "default": false
+          },
+          "pinterest": {
+            "order": 4,
+            "title": "Pinterest",
+            "type": "boolean",
+            "default": false
+          },
+          "email": {
+            "order": 5,
+            "title": "Email",
+            "type": "boolean",
+            "default": true
+          }
+        }
+      }
+    }
+  }
+}

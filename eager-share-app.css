@@ -1,0 +1,405 @@
+.eager-share-app {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none
+}
+
+.eager-share-app:before, .eager-share-app:after, .eager-share-app *, .eager-share-app *:before, .eager-share-app *:after {
+  box-sizing: inherit
+}
+
+@font-face {
+  font-family: "eager-share-app-icons";
+  font-style: normal;
+  font-weight: normal;
+  src: url(data:application/x-font-woff;charset=utf-8;base64,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) format("woff")
+}
+
+.eager-share-app [class^="eager-share-app-icon-"]:before {
+  font-family: "eager-share-app-icons";
+  font-style: normal;
+  font-weight: normal
+}
+
+.eager-share-app-icon-share:before {
+  content: "\ea7d"
+}
+
+.eager-share-app-icon-twitter:before {
+  content: "\e604"
+}
+
+.eager-share-app-icon-facebook:before {
+  content: "\e600"
+}
+
+.eager-share-app-icon-google:before {
+  content: "\e601"
+}
+
+.eager-share-app-icon-pinterest:before {
+  content: "\e602"
+}
+
+.eager-share-app-icon-email:before {
+  content: "\e603"
+}
+
+.eager-share-app-target {
+  position: fixed;
+  top: 120px;
+  left: 0;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  background: black;
+  color: white;
+  padding-left: 64px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 20px;
+  text-align: left;
+  width: 67px;
+  overflow: hidden;
+  -webkit-transition: width 360ms;
+  transition: width 360ms
+}
+
+  .eager-share-app-target[eager-share-app-places-count="1"] {
+    -webkit-transition-delay: 300ms;
+    transition-delay: 300ms
+  }
+
+  .eager-share-app-target[eager-share-app-places-count="2"] {
+    -webkit-transition-delay: 400ms;
+    transition-delay: 400ms
+  }
+
+  .eager-share-app-target[eager-share-app-places-count="3"] {
+    -webkit-transition-delay: 500ms;
+    transition-delay: 500ms
+  }
+
+  .eager-share-app-target[eager-share-app-places-count="4"] {
+    -webkit-transition-delay: 600ms;
+    transition-delay: 600ms
+  }
+
+  .eager-share-app-target[eager-share-app-places-count="5"] {
+    -webkit-transition-delay: 700ms;
+    transition-delay: 700ms
+  }
+
+  .eager-share-app-target:hover,
+  .eager-share-app-target.eager-share-app-enabled {
+    width: 172px;
+    -webkit-transition: width 360ms ease;
+    transition: width 360ms ease;
+    -webkit-transition-delay: 0ms;
+    transition-delay: 0ms
+  }
+
+  .eager-share-app-target span {
+    opacity: 0;
+    -webkit-transform: translate3d(54px, 0, 0);
+    transform: translate3d(54px, 0, 0);
+    -webkit-transition: opacity 360ms, -webkit-transform 360ms;
+    transition: opacity 360ms, transform 360ms
+  }
+
+    .eager-share-app-target[eager-share-app-places-count="1"] span {
+      -webkit-transition-delay: 300ms, 300ms;
+      transition-delay: 300m, 300ms
+    }
+
+    .eager-share-app-target[eager-share-app-places-count="2"] span {
+      -webkit-transition-delay: 400ms, 400ms;
+      transition-delay: 400m, 400ms
+    }
+
+    .eager-share-app-target[eager-share-app-places-count="3"] span {
+      -webkit-transition-delay: 500ms, 500ms;
+      transition-delay: 500m, 500ms
+    }
+
+    .eager-share-app-target[eager-share-app-places-count="4"] span {
+      -webkit-transition-delay: 600ms, 600ms;
+      transition-delay: 600m, 600ms
+    }
+
+    .eager-share-app-target[eager-share-app-places-count="5"] span {
+      -webkit-transition-delay: 700ms, 700ms;
+      transition-delay: 700m, 700ms
+    }
+
+  .eager-share-app-target:hover span,
+  .eager-share-app-target.eager-share-app-enabled span {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transition: opacity 360ms ease, -webkit-transform 360ms ease;
+    transition: opacity 360ms ease, transform 360ms ease
+  }
+
+  .eager-share-app-target i[class^="eager-share-app-icon-"]:before {
+    position: absolute;
+    font-size: 32px;
+    line-height: 29px;
+    height: 31px;
+    width: 46px;
+    top: 0;
+    bottom: 0;
+    left: 12px;
+    margin: auto;
+    text-align: center
+  }
+
+.eager-share-app-element {
+  position: absolute;
+  /* TODO: uncomment once transition end issue is fixed */
+  /*
+  display: none;
+  */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transition: opacity 3000ms;
+  transition: opacity 3000ms;
+  opacity: .999;
+  width: 172px
+}
+
+  /* TODO: uncomment once transition end issue is fixed */
+  /*
+  .eager-share-app-element.eager-share-app-open {
+    display: none
+  }
+  */
+
+  .eager-share-app-element.eager-share-app-open-transitionend {
+    display: block
+  }
+
+  .eager-share-app-element.eager-share-app-after-open {
+    -webkit-transition: none;
+    transition: none;
+    opacity: 1
+  }
+
+  .eager-share-app-element .eager-share-app-content {
+    overflow: hidden;
+    position: relative;
+    color: #444
+  }
+
+    .eager-share-app-element a[class^="eager-share-app-icon-"], .eager-share-app-element a[class*=" eager-share-app-icon-"] {
+      padding: 0 20px 0 64px
+    }
+
+      .eager-share-app-element a[class^="eager-share-app-icon-"]:before, .eager-share-app-element a[class*=" eager-share-app-icon-"]:before {
+        position: absolute;
+        font-size: 34px;
+        line-height: 29px;
+        height: 30px;
+        width: 41px;
+        top: 0;
+        bottom: 0;
+        left: 12px;
+        margin: auto;
+        text-align: center
+      }
+
+      .eager-share-app-element .eager-share-app-icon-twitter:before {
+        color: #55acee
+      }
+
+      .eager-share-app-element .eager-share-app-icon-facebook:before {
+        color: #3b5998
+      }
+
+      .eager-share-app-element .eager-share-app-icon-google:before {
+        color: #dd4b39
+      }
+
+      .eager-share-app-element .eager-share-app-icon-pinterest:before {
+        color: #c92228
+      }
+
+  .eager-share-app-element ul {
+    position: relative;
+    display: block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0
+  }
+
+  .eager-share-app-element li {
+    position: relative;
+    display: block
+  }
+
+  .eager-share-app-element a {
+    display: block;
+    width: 100%;
+    line-height: 60px;
+    height: 60px;
+    padding: 0 30px 0 75px;
+    font-size: 20px;
+    font-weight: normal;
+    background: #efefef;
+    color: inherit;
+    cursor: pointer;
+    -webkit-backface-visibility: hidden;
+    -webkit-touch-callout: none;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0)
+  }
+
+    .eager-share-app-element a,
+    .eager-share-app-element a:hover {
+      text-decoration: none
+    }
+
+    .eager-share-app-element a:hover {
+      background: #e2e2e2
+    }
+
+  .eager-share-app-element li a {
+    -webkit-transition: -webkit-transform 300ms;
+    transition: transform 300ms;
+    -webkit-transition-timing-function: cubic-bezier(.75, 0, .75, .9); /* ease rotated 180deg */
+    transition-timing-function: cubic-bezier(.75, 0, .75, .9);
+  }
+
+    .eager-share-app-element li:nth-child(1) a {
+      -webkit-transform: translate3d(0, -60px, 0);
+      transform: translate3d(0, -60px, 0);
+      -webkit-transition-delay: 0ms;
+      transition-delay: 0ms
+    }
+
+    .eager-share-app-element li:nth-child(2) a {
+      -webkit-transform: translate3d(0, -120px, 0);
+      transform: translate3d(0, -120px, 0);
+      -webkit-transition-delay: 100ms;
+      transition-delay: 100ms
+    }
+
+    .eager-share-app-element li:nth-child(3) a {
+      -webkit-transform: translate3d(0, -180px, 0);
+      transform: translate3d(0, -180px, 0);
+      -webkit-transition-delay: 200ms;
+      transition-delay: 200ms
+    }
+
+    .eager-share-app-element li:nth-child(4) a {
+      -webkit-transform: translate3d(0, -240px, 0);
+      transform: translate3d(0, -240px, 0);
+      -webkit-transition-delay: 300ms;
+      transition-delay: 300ms
+    }
+
+    .eager-share-app-element li:nth-child(5) a {
+      -webkit-transform: translate3d(0, -300px, 0);
+      transform: translate3d(0, -300px, 0);
+      -webkit-transition-delay: 400ms;
+      transition-delay: 400ms
+    }
+
+  .eager-share-app-element.eager-share-app-after-open li a {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transition-timing-function: ease;
+    transition-timing-function: ease
+  }
+
+    .eager-share-app-element.eager-share-app-after-open li:nth-last-child(1) a,
+    .eager-share-app-element.eager-share-app-element-attached-bottom li:nth-last-child(1) a {
+      -webkit-transition-delay: 0ms;
+      transition-delay: 0ms
+    }
+
+    .eager-share-app-element.eager-share-app-after-open li:nth-last-child(2) a,
+    .eager-share-app-element.eager-share-app-element-attached-bottom li:nth-last-child(2) a {
+      -webkit-transition-delay: 100ms;
+      transition-delay: 100ms
+    }
+
+    .eager-share-app-element.eager-share-app-after-open li:nth-last-child(3) a,
+    .eager-share-app-element.eager-share-app-element-attached-bottom li:nth-last-child(3) a {
+      -webkit-transition-delay: 200ms;
+      transition-delay: 200ms
+    }
+
+    .eager-share-app-element.eager-share-app-after-open li:nth-last-child(4) a,
+    .eager-share-app-element.eager-share-app-element-attached-bottom li:nth-last-child(4) a {
+      -webkit-transition-delay: 300ms;
+      transition-delay: 300ms
+    }
+
+    .eager-share-app-element.eager-share-app-after-open li:nth-last-child(5) a,
+    .eager-share-app-element.eager-share-app-element-attached-bottom li:nth-last-child(5) a {
+      -webkit-transition-delay: 400ms;
+      transition-delay: 400ms
+    }
+
+    .eager-share-app-element.eager-share-app-element-attached-bottom li:nth-last-child(1) a {
+      -webkit-transform: translate3d(0, 60px, 0);
+      transform: translate3d(0, 60px, 0)
+    }
+
+    .eager-share-app-element.eager-share-app-element-attached-bottom li:nth-last-child(2) a {
+      -webkit-transform: translate3d(0, 120px, 0);
+      transform: translate3d(0, 120px, 0)
+    }
+
+    .eager-share-app-element.eager-share-app-element-attached-bottom li:nth-last-child(3) a {
+      -webkit-transform: translate3d(0, 180px, 0);
+      transform: translate3d(0, 180px, 0)
+    }
+
+    .eager-share-app-element.eager-share-app-element-attached-bottom li:nth-last-child(4) a {
+      -webkit-transform: translate3d(0, 240px, 0);
+      transform: translate3d(0, 240px, 0)
+    }
+
+    .eager-share-app-element.eager-share-app-element-attached-bottom li:nth-last-child(5) a {
+      -webkit-transform: translate3d(0, 300px, 0);
+      transform: translate3d(0, 300px, 0)
+    }
+
+  .eager-share-app-element.eager-share-app-element-attached-bottom.eager-share-app-after-open li a {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transition-timing-function: ease;
+    transition-timing-function: ease
+  }
+
+    .eager-share-app-element.eager-share-app-element-attached-bottom.eager-share-app-after-open li:nth-child(1) a {
+      -webkit-transition-delay: 0ms;
+      transition-delay: 0ms
+    }
+
+    .eager-share-app-element.eager-share-app-element-attached-bottom.eager-share-app-after-open li:nth-child(2) a {
+      -webkit-transition-delay: 100ms;
+      transition-delay: 100ms
+    }
+
+    .eager-share-app-element.eager-share-app-element-attached-bottom.eager-share-app-after-open li:nth-child(3) a {
+      -webkit-transition-delay: 200ms;
+      transition-delay: 200ms
+    }
+
+    .eager-share-app-element.eager-share-app-element-attached-bottom.eager-share-app-after-open li:nth-child(4) a {
+      -webkit-transition-delay: 300ms;
+      transition-delay: 300ms
+    }
+
+    .eager-share-app-element.eager-share-app-element-attached-bottom.eager-share-app-after-open li:nth-child(5) a {
+      -webkit-transition-delay: 400ms;
+      transition-delay: 400ms
+    }
