@@ -46,23 +46,41 @@
   document.body.appendChild(target);
 
   locationsCSSMap = {
-    'left-edge': 'left: 0; top: 60px',
-    'right-edge': 'right: 0; top: 60px',
-    'top-left-corner': 'top: 30px; left: 30px',
-    'top-right-corner': 'top: 30px; right: 30px',
-    'bottom-left-corner': 'bottom: 30px; left: 30px',
-    'bottom-right-corner': 'bottom: 30px; right: 30px'
+    'left-edge': {
+      dropPosition: 'bottom left',
+      targetCSS: 'left: 0; top: 60px'
+    },
+    'right-edge': {
+      dropPosition: 'bottom right',
+      targetCSS: 'right: 0; top: 60px'
+    },
+    'top-left-corner': {
+      dropPosition: 'bottom left',
+      targetCSS: 'top: 30px; left: 30px'
+    },
+    'top-right-corner': {
+      dropPosition: 'bottom right',
+      targetCSS: 'top: 30px; right: 30px'
+    },
+    'bottom-left-corner': {
+      dropPosition: 'top left',
+      targetCSS: 'bottom: 30px; left: 30px'
+    },
+    'bottom-right-corner': {
+      dropPosition: 'top right',
+      targetCSS: 'bottom: 30px; right: 30px'
+    }
   };
 
   locationStyle = document.createElement('style');
-  locationStyle.innerHTML = '.eager-share-app-target {' + locationsCSSMap[options.location] + '}';
+  locationStyle.innerHTML = '.eager-share-app-target {' + locationsCSSMap[options.location].targetCSS + '}';
   document.body.appendChild(locationStyle);
 
   drop = new _Drop({
     target: target,
     classes: 'eager-share-app',
     openOn: 'click',
-    position: 'bottom left',
+    position: locationsCSSMap[options.location].dropPosition,
     constrainToWindow: true,
     constrainToScrollParent: false,
     content: '<ul></ul>'
