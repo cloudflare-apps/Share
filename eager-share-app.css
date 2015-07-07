@@ -61,8 +61,6 @@
 .eager-share-app-target {
   position: fixed;
   z-index: 800;
-  top: 120px;
-  left: 0;
   display: inline-block;
   vertical-align: middle;
   cursor: pointer;
