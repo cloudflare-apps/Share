@@ -52,6 +52,7 @@
 
 .eager-share-app-target {
   position: fixed;
+  z-index: 800;
   top: 120px;
   left: 0;
   display: inline-block;
@@ -73,6 +74,7 @@
   .eager-share-app-target:hover,
   .eager-share-app-target:focus,
   .eager-share-app-target:active {
+    border: 0;
     outline: none;
     color: #fff
   }
@@ -168,6 +170,7 @@
 
 .eager-share-app-element {
   position: absolute;
+  z-index: 810;
   /* TODO: uncomment once transition end issue is fixed */
   /*
   display: none;
