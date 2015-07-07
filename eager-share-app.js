@@ -3,7 +3,7 @@
     return
   }
 
-  var options, encode, getPageAttributes, page, _Drop, target, drop, dropUl, placesMap, placesCount, addPlace, setUpPlaceLink;
+  var options, encode, getPageAttributes, page, _Drop, target, drop, dropUl, placesMap, placesOrder, i, placesCount, addPlace, setUpPlaceLink;
 
   options = INSTALL_OPTIONS;
   encode = encodeURIComponent;
@@ -89,6 +89,10 @@
     }
   };
 
+  placesOrder = [
+    'twitter', 'facebook', 'google', 'pinterest', 'email'
+  ];
+
   addPlace = function(place) {
     var li, a, text;
 
@@ -134,12 +138,10 @@
 
   placesCount = 0;
 
-  for (place in options.places) {
-    if (options.places.hasOwnProperty(place)) {
-      if (options.places[place]) {
-        addPlace(place);
-        placesCount += 1;
-      }
+  for (i = 0; i < placesOrder.length; i++) {
+    if (options.places[placesOrder[i]]) {
+      addPlace(placesOrder[i]);
+      placesCount += 1;
     }
   }
 
