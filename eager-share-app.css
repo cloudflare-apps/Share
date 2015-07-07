@@ -171,24 +171,43 @@
 .eager-share-app-element {
   position: absolute;
   z-index: 810;
-  /* TODO: uncomment once transition end issue is fixed */
-  /*
   display: none;
-  */
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-transition: opacity 3000ms;
-  transition: opacity 3000ms;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
   opacity: .999;
   width: 172px
 }
 
-  /* TODO: uncomment once transition end issue is fixed */
-  /*
+  .eager-share-app-element[eager-share-app-places-count="1"] {
+    -webkit-transition-duration: 300ms;
+    transition-delay: 300ms
+  }
+
+  .eager-share-app-element[eager-share-app-places-count="2"] {
+    -webkit-transition-duration: 400ms;
+    transition-delay: 400ms
+  }
+
+  .eager-share-app-element[eager-share-app-places-count="3"] {
+    -webkit-transition-duration: 500ms;
+    transition-delay: 500ms
+  }
+
+  .eager-share-app-element[eager-share-app-places-count="4"] {
+    -webkit-transition-duration: 600ms;
+    transition-delay: 600ms
+  }
+
+  .eager-share-app-element[eager-share-app-places-count="5"] {
+    -webkit-transition-duration: 700ms;
+    transition-delay: 700ms
+  }
+
   .eager-share-app-element.eager-share-app-open {
     display: none
   }
-  */
 
   .eager-share-app-element.eager-share-app-open-transitionend {
     display: block
