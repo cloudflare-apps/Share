@@ -3,7 +3,7 @@
     return
   }
 
-  var options, encode, getFullPath, getPageAttributes, page, _Drop, target, drop, dropUl, locationsCSSMap, locationStyle, placesMap, placesOrder, i, placesCount, addPlace, setUpPlaceLink;
+  var options, encode, getFullPath, getMeta, getPageAttributes, page, _Drop, target, drop, dropUl, locationsCSSMap, locationStyle, placesMap, placesOrder, i, placesCount, addPlace, setUpPlaceLink;
 
   options = INSTALL_OPTIONS;
   encode = encodeURIComponent;
@@ -14,32 +14,38 @@
     return a.href;
   };
 
-  getPageAttributes = function() {
-    var page, el;
+  getMeta = function(selector, property, isURL) {
+    var el, value;
 
-    page = {
+    value = null;
+
+    if (document.head && el = document.head.querySelector(selector)) {
+      value = el.getAttribute(property);
+
+      if (isURL) {
+        value = getFullPath(value);
+      }
+    }
+
+    return value;
+  };
+
+  getPageAttributes = function() {
+    var page = {
       url: window.location.protocol + '//' + window.location.hostname + window.location.pathname,
       title: document.title,
       description: null,
       image: null
-    }
+    };
 
-    if (document.head) {
-      el = document.head.querySelector('meta[property="title"][content]');
-      if (el) {
-        page.title = el.getAttribute('content');
-      }
+    page.url = getMeta('meta[rel="canonical"][href]', 'href', true);
+    page.url = getMeta('meta[property="og:url"][content]', 'content', true);
 
-      el = document.head.querySelector('meta[name="description"][content], meta[property*="description"][content]');
-      if (el) {
-        page.description = getFullPath(el.getAttribute('content'));
-      }
+    page.title = getMeta('meta[property="og:title"][content]', 'content');
 
-      el = document.head.querySelector('meta[property="og:image"][content], meta[property*="image"][content]');
-      if (el) {
-        page.image = getFullPath(el.getAttribute('content'));
-      }
-    }
+    page.description = getMeta('meta[name="description"][content], meta[property="og:description"][content]', 'content');
+
+    page.image = getFullPath('meta[property="og:image"][content]', 'content', true);
 
     return page;
   };
