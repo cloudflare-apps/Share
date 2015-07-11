@@ -3,10 +3,16 @@
     return
   }
 
-  var options, encode, getPageAttributes, page, _Drop, target, drop, dropUl, locationsCSSMap, locationStyle, placesMap, placesOrder, i, placesCount, addPlace, setUpPlaceLink;
+  var options, encode, getFullPath, getPageAttributes, page, _Drop, target, drop, dropUl, locationsCSSMap, locationStyle, placesMap, placesOrder, i, placesCount, addPlace, setUpPlaceLink;
 
   options = INSTALL_OPTIONS;
   encode = encodeURIComponent;
+
+  getFullPath = function(path) {
+    var a = document.createElement('a');
+    a.href = path;
+    return a.href;
+  };
 
   getPageAttributes = function() {
     var page, el;
@@ -19,14 +25,19 @@
     }
 
     if (document.head) {
-      el = document.head.querySelector('meta[name="description"][content], meta[name*="description"][content]');
+      el = document.head.querySelector('meta[property="title"][content]');
       if (el) {
-        page.description = el.getAttribute('content');
+        page.title = el.getAttribute('content');
       }
 
-      el = document.head.querySelector('meta[name="og:image"][content], meta[name*="image"][content]');
+      el = document.head.querySelector('meta[name="description"][content], meta[property*="description"][content]');
       if (el) {
-        page.image = el.getAttribute('content');
+        page.description = getFullPath(el.getAttribute('content'));
+      }
+
+      el = document.head.querySelector('meta[property="og:image"][content], meta[property*="image"][content]');
+      if (el) {
+        page.image = getFullPath(el.getAttribute('content'));
       }
     }
 
