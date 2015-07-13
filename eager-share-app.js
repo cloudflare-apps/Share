@@ -19,7 +19,7 @@
 
     value = null;
 
-    if (document.head && el = document.head.querySelector(selector)) {
+    if (document.head && (el = document.head.querySelector(selector))) {
       value = el.getAttribute(property);
 
       if (isURL) {
