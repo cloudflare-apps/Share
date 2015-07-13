@@ -45,7 +45,7 @@
 
     page.description = getMeta('meta[name="description"][content], meta[property="og:description"][content]', 'content');
 
-    page.image = getFullPath('meta[property="og:image"][content]', 'content', true);
+    page.image = getMeta('meta[property="og:image"][content]', 'content', true);
 
     return page;
   };
