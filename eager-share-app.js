@@ -34,18 +34,14 @@
     var page = {
       url: window.location.protocol + '//' + window.location.hostname + window.location.pathname,
       title: document.title,
-      description: null,
-      image: null
+      description: getMeta('meta[name="description"][content], meta[property="og:description"][content]', 'content'),
+      image: getMeta('meta[property="og:image"][content]', 'content', true)
     };
 
-    page.url = getMeta('meta[rel="canonical"][href]', 'href', true);
-    page.url = getMeta('meta[property="og:url"][content]', 'content', true);
+    page.url = getMeta('meta[rel="canonical"][href]', 'href', true) || page.url;
+    page.url = getMeta('meta[property="og:url"][content]', 'content', true) || page.url;
 
-    page.title = getMeta('meta[property="og:title"][content]', 'content');
-
-    page.description = getMeta('meta[name="description"][content], meta[property="og:description"][content]', 'content');
-
-    page.image = getMeta('meta[property="og:image"][content]', 'content', true);
+    page.title = getMeta('meta[property="og:title"][content]', 'content') || page.title;
 
     return page;
   };
