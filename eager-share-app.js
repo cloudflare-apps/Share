@@ -133,7 +133,7 @@
     },
     email: {
       label: 'Email',
-      href: 'mailto:?subject=' + encode(page.title) + '&body=' + encode((page.description ? page.description + ' ' : '') +  page.url)
+      href: 'mailto:?subject=' + encode(page.title) + '&body=' + encode((page.description ? page.description + ' ' : '') + page.url)
     }
   };
 
