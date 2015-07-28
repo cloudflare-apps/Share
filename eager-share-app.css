@@ -300,7 +300,7 @@
     }
 
     .eager-share-app-element a:hover {
-      background: #e2e2e2
+      background: #e2e2e2 !important
     }
 
   .eager-share-app-element li a {
