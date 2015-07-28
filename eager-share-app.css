@@ -81,7 +81,8 @@
   .eager-share-app-target:hover,
   .eager-share-app-target:focus,
   .eager-share-app-target:active {
-    color: #fff
+    color: #fff !important;
+    text-decoration: none !important
   }
 
   .eager-share-app-target[eager-share-app-places-count="1"] {
