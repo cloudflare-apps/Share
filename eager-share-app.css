@@ -226,8 +226,7 @@
 
   .eager-share-app-element .eager-share-app-content {
     overflow: hidden;
-    position: relative;
-    color: #444
+    position: relative
   }
 
     .eager-share-app-element a[class^="eager-share-app-icon-"], .eager-share-app-element a[class*=" eager-share-app-icon-"] {
@@ -276,14 +275,15 @@
 
   .eager-share-app-element a {
     display: block;
-    width: 100%;
-    line-height: 60px;
-    height: 60px;
+    width: 100% !important;
+    line-height: 60px !important;
+    height: 60px !important;
     padding: 0 30px 0 75px !important;
-    font-size: 20px;
-    font-weight: normal;
-    background: #efefef;
-    color: inherit;
+    font-size: 20px !important;
+    font-weight: normal !important;
+    background: #efefef !important;
+    color: #444 !important;
+    border: 0 !important;
     cursor: pointer;
     -webkit-backface-visibility: hidden;
     -webkit-touch-callout: none;
@@ -293,9 +293,9 @@
 
     .eager-share-app-element a,
     .eager-share-app-element a:hover {
-      outline: none;
-      border: 0;
-      text-decoration: none
+      outline: none !important;
+      border: 0 !important;
+      text-decoration: none !important
     }
 
     .eager-share-app-element a:hover {
