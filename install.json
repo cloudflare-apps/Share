@@ -63,8 +63,8 @@
       "location": {
         "order": 2,
         "title": "Location",
-        "format": "radios",
         "type": "string",
+        "format": "radios",
         "enum": [
           "left-edge",
           "right-edge",
@@ -82,6 +82,43 @@
           "bottom-right-corner": "Bottom right corner"
         },
         "default": "left-edge"
+      },
+      "useCustomColors": {
+        "order": 3,
+        "title": "Use custom colors",
+        "type": "boolean",
+        "default": false
+      },
+      "colors": {
+        "order": 4,
+        "showIf": {
+          "useCustomColors": true
+        },
+        "notitle": true,
+        "type": "object",
+        "properties": {
+          "accent": {
+            "order": 1,
+            "title": "Accent color",
+            "type": "string",
+            "format": "color",
+            "default": "#0099ff"
+          },
+          "shareIconBackground": {
+            "order": 2,
+            "title": "Share icon background color",
+            "type": "string",
+            "format": "color",
+            "default": "#000000"
+          },
+          "shareIconText": {
+            "order": 3,
+            "title": "Share icon text color",
+            "type": "string",
+            "format": "color",
+            "default": "#ffffff"
+          }
+        }
       }
     }
   }

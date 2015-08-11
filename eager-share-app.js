@@ -3,7 +3,7 @@
     return
   }
 
-  var options, encode, getFullPath, getMeta, getPageAttributes, page, _Drop, target, drop, dropUl, locationsCSSMap, locationStyle, placesMap, placesOrder, i, placesCount, addPlace, setUpPlaceLink;
+  var options, encode, getFullPath, getMeta, getPageAttributes, page, _Drop, target, drop, dropUl, locationsCSSMap, locationStyle, colorStyle, placesMap, placesOrder, i, placesCount, addPlace, setUpPlaceLink;
 
   options = INSTALL_OPTIONS;
   encode = encodeURIComponent;
@@ -88,6 +88,26 @@
   locationStyle = document.createElement('style');
   locationStyle.innerHTML = '.eager-share-app-target {' + locationsCSSMap[options.location].targetCSS + '}';
   document.body.appendChild(locationStyle);
+
+  if (options.useCustomColors) {
+    colorStyle = document.createElement('style');
+    colorStyle.innerHTML = (
+    ' .eager-share-app-element a, .eager-share-app-element a:hover {' +
+    '    background: ' + options.colors.accent + '!important;' +
+    ' }' +
+    ' .eager-share-app-element a, .eager-share-app-element a:before {' +
+    '   color: #fff !important' +
+    ' }' +
+    ' .eager-share-app-element a:hover {' +
+    '    box-shadow: inset 0 0 0 999em rgba(0, 0, 0, .3) !important' +
+    ' }' +
+    ' .eager-share-app-target, .eager-share-app-target:hover, .eager-share-app-target:active {' +
+    '    background: ' + options.colors.shareIconBackground + '!important;' +
+    '    color: ' + options.colors.shareIconText + '!important' +
+    ' }' +
+    '');
+    document.body.appendChild(colorStyle);
+  }
 
   drop = new _Drop({
     target: target,
