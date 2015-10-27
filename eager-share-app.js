@@ -3,7 +3,7 @@
     return
   }
 
-  var options, encode, getFullPath, getMeta, getPageAttributes, page, _Drop, target, drop, dropUl, locationsCSSMap, locationStyle, colorStyle, placesMap, placesOrder, i, placesCount, addPlace, setUpPlaceLink;
+  var options, encode, getFullPath, getMeta, getPageAttributes, page, _Drop, target, drop, dropUl, locationsCSSMap, locationStyle, colorStyle, placesMap, placesOrder, i, addPlace, setUpPlaceLink, updatePlaces, updateColors, updateLocationStyle, updateDrop, update, setOptions, prevLocation;
 
   options = INSTALL_OPTIONS;
   encode = encodeURIComponent;
@@ -56,6 +56,9 @@
   target.className = 'eager-share-app-target';
   target.innerHTML = '<i class="eager-share-app-icon-share"></i><span>Share...</span>';
 
+  // iOS :hover CSS hack
+  target.addEventListener('touchstart', function(){}, false);
+
   document.body.appendChild(target);
 
   locationsCSSMap = {
@@ -86,40 +89,33 @@
   };
 
   locationStyle = document.createElement('style');
-  locationStyle.innerHTML = '.eager-share-app-target {' + locationsCSSMap[options.location].targetCSS + '}';
   document.body.appendChild(locationStyle);
 
-  if (options.useCustomColors) {
-    colorStyle = document.createElement('style');
-    colorStyle.innerHTML = (
-    ' .eager-share-app-element a, .eager-share-app-element a:hover {' +
-    '    background: ' + options.colors.accent + '!important;' +
-    ' }' +
-    ' .eager-share-app-element a, .eager-share-app-element a:before {' +
-    '   color: #fff !important' +
-    ' }' +
-    ' .eager-share-app-element a:hover {' +
-    '    box-shadow: inset 0 0 0 999em rgba(0, 0, 0, .3) !important' +
-    ' }' +
-    ' .eager-share-app-target, .eager-share-app-target:hover, .eager-share-app-target:active {' +
-    '    background: ' + options.colors.shareIconBackground + '!important;' +
-    '    color: ' + options.colors.shareIconText + '!important' +
-    ' }' +
-    '');
-    document.body.appendChild(colorStyle);
-  }
+  colorStyle = document.createElement('style');
+  document.body.appendChild(colorStyle);
 
-  drop = new _Drop({
-    target: target,
-    classes: 'eager-share-app',
-    openOn: 'click',
-    position: locationsCSSMap[options.location].dropPosition,
-    constrainToWindow: true,
-    constrainToScrollParent: false,
-    content: '<ul></ul>'
-  });
+  updateDrop = function() {
+    if (drop){
+      drop.destroy();
+    }
 
-  dropUl = drop.drop.querySelector('ul');
+    prevLocation = options.location;
+
+    drop = new _Drop({
+      target: target,
+      classes: 'eager-share-app',
+      openOn: 'click',
+      position: locationsCSSMap[options.location].dropPosition,
+      constrainToWindow: true,
+      constrainToScrollParent: false,
+      content: '<ul></ul>'
+    });
+
+    // iOS :hover CSS hack
+    drop.drop.addEventListener('touchstart', function(){}, false);
+
+    dropUl = drop.drop.querySelector('ul');
+  };
 
   placesMap = {
     twitter: {
@@ -181,38 +177,92 @@
 
   setUpPlaceLink = function(link) {
     link.addEventListener('click', function(event){
-      var height, left, top, width, popupwindow, interval;
+      var height, left, top, width, popUpWindow, interval;
+
       event.preventDefault();
+
       width = 800;
       height = 500;
       left = (screen.width / 2) - (width / 2);
       top = (screen.height / 2) - (height / 2);
-      popupwindow = window.open(link.getAttribute('href'), 'popupwindow', 'scrollbars=yes,width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
-      popupwindow.focus();
+
+      popUpWindow = window.open(link.getAttribute('href'), 'popupwindow', 'scrollbars=yes,width=' + width + ',height=' + height + ',top=' + top + ',left=' + left);
+      popUpWindow.focus();
+
       interval = setInterval(function(){
         try {
-          if (popupwindow.closed) {
+          if (popUpWindow.closed) {
             drop.close();
             clearInterval(interval);
           }
         } catch (error) {}
       }, 100);
     });
-  }
+  };
 
-  placesCount = 0;
+  updatePlaces = function() {
+    var placesCount;
 
-  for (i = 0; i < placesOrder.length; i++) {
-    if (options.places[placesOrder[i]]) {
-      addPlace(placesOrder[i]);
-      placesCount += 1;
+    dropUl.innerHTML = '';
+
+    placesCount = 0;
+
+    for (i = 0; i < placesOrder.length; i++) {
+      if (options.places[placesOrder[i]]) {
+        addPlace(placesOrder[i]);
+        placesCount += 1;
+      }
     }
-  }
 
-  target.setAttribute('eager-share-app-places-count', placesCount);
-  drop.drop.setAttribute('eager-share-app-places-count', placesCount);
+    target.setAttribute('eager-share-app-places-count', placesCount);
+    drop.drop.setAttribute('eager-share-app-places-count', placesCount);
+  };
 
-  // iOS :hover CSS hack
-  target.addEventListener('touchstart', function(){}, false);
-  drop.drop.addEventListener('touchstart', function(){}, false);
+  updateColors = function() {
+    if (options.useCustomColors) {
+      colorStyle.innerHTML = (
+      ' .eager-share-app-element a, .eager-share-app-element a:hover {' +
+      '    background: ' + options.colors.accent + '!important;' +
+      ' }' +
+      ' .eager-share-app-element a, .eager-share-app-element a:before {' +
+      '   color: #fff !important' +
+      ' }' +
+      ' .eager-share-app-element a:hover {' +
+      '    box-shadow: inset 0 0 0 999em rgba(0, 0, 0, .3) !important' +
+      ' }' +
+      ' .eager-share-app-target, .eager-share-app-target:hover, .eager-share-app-target:active {' +
+      '    background: ' + options.colors.shareIconBackground + '!important;' +
+      '    color: ' + options.colors.shareIconText + '!important' +
+      ' }' +
+      '');
+    } else {
+      colorStyle.innerHTML = '';
+    }
+  };
+
+  updateLocationStyle = function() {
+    locationStyle.innerHTML = '.eager-share-app-target {' + locationsCSSMap[options.location].targetCSS + '}';
+  };
+
+  update = function() {
+    if (!prevLocation || prevLocation !== options.location){
+      updateDrop();
+      updateLocationStyle();
+    }
+
+    updatePlaces();
+    updateColors();
+  };
+
+  update();
+
+  setOptions = function(opts) {
+    options = opts;
+
+    update();
+  };
+
+  window.EagerShareApp = {
+    setOptions: setOptions
+  };
 })();
